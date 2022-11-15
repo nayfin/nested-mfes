@@ -1,5 +1,5 @@
-<ul class="remote-menu">
-  <li><a routerLink="/">Home</a></li>
-  <li><a routerLink="login">Login</a></li>
-</ul>
-<router-outlet></router-outlet>
+<div class="dashboard-nav">Admin Dashboard</div>
+<div *ngIf="isLoggedIn$ | async; else signIn">
+  You are authenticated so you can see this content.
+</div>
+<ng-template #signIn><router-outlet></router-outlet></ng-template>
