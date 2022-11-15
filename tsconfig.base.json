@@ -15,7 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@nested-mfes/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@nested-mfes/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@nested-mfes/shared/data-access-user": [
+        "libs/shared/data-access-user/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
