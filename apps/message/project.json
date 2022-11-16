@@ -1,0 +1,115 @@
+{
+  "name": "message",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/message/src",
+  "prefix": "nested-mfes",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:webpack-browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/message",
+        "index": "apps/message/src/index.html",
+        "main": "apps/message/src/main.ts",
+        "polyfills": "apps/message/src/polyfills.ts",
+        "tsConfig": "apps/message/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/message/src/favicon.ico", "apps/message/src/assets"],
+        "styles": ["apps/message/src/styles.scss"],
+        "scripts": [],
+        "customWebpackConfig": {
+          "path": "apps/message/webpack.config.js"
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/message/src/environments/environment.ts",
+              "with": "apps/message/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/message/webpack.prod.config.js"
+          }
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@nrwl/angular:webpack-dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "message:build:production"
+        },
+        "development": {
+          "browserTarget": "message:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4202,
+        "publicHost": "http://localhost:4202"
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "message:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["apps/message/**/*.ts", "apps/message/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/message/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/angular:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "message:build",
+        "port": 4202
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "message:build:development"
+        },
+        "production": {
+          "buildTarget": "message:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

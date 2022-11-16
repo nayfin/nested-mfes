@@ -18,6 +18,7 @@ import { UserService } from '@nested-mfes/shared/data-access-user';
       <button type="submit">Login</button>
     </form>
     <div *ngIf="isLoggedIn$ | async">User is logged in!</div>
+    <div #mfeEntrypoint></div>
   </div>
   `,
 })
