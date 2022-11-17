@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'nested-mfes-message-entry',
@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
     <h1>
       MESSAGE COMPONENT
     </h1>
+    <h2>Message: {{message}}</h2>
   `,
 })
-export class RemoteEntryComponent {}
+export class RemoteEntryComponent {
+  @Input() message = 'Initial Message';
+}

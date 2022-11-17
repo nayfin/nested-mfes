@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '@nested-mfes/shared/data-access-user';
 import { distinctUntilChanged } from 'rxjs/operators';
@@ -7,11 +7,8 @@ import { distinctUntilChanged } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   
-  @ViewChild('mfeOutlet', { read: ViewContainerRef })
-  viewContainer!: ViewContainerRef;
-
   isLoggedIn$ = this.userService.isUserLoggedIn$;
 
   constructor(
@@ -32,10 +29,5 @@ export class AppComponent implements OnInit, AfterViewInit {
           }
         });
       });
-  }
-
-  async ngAfterViewInit() {
-    const m = await import('message/Component');
-    const ref = this.viewContainer.createComponent(m.RemoteEntryComponent);
   }
 }
