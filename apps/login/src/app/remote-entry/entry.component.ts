@@ -39,11 +39,10 @@ export class RemoteEntryComponent implements AfterViewInit{
   }
 
   async ngAfterViewInit() {
-    // TODO: this needs to happen somewhere else
+    // TODO: this shouldn't be needed here and could potentially overwrite existing remote definitions 
     await fetch('/assets/module-federation.manifest.json')
       .then((res) => res.json())
       .then((definitions) => {
-        console.log({definitions})
         return setRemoteDefinitions(definitions)
     })
     const m = await loadRemoteModule('message', './Component');
