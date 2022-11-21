@@ -18,7 +18,8 @@
       "@nested-mfes/api-interfaces": ["libs/api-interfaces/src/index.ts"],
       "@nested-mfes/shared/data-access-user": [
         "libs/shared/data-access-user/src/index.ts"
-      ]
+      ],
+      "@nested-mfes/shared/mfe-utils": ["libs/shared/mfe-utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

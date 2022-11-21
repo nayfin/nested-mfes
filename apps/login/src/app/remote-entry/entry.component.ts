@@ -8,7 +8,7 @@ import { setRemoteDefinitions } from '@nrwl/angular/mf';
   template: `  
   LOGIN REMOTE
   <div class="login-app">
-    <div #mfeOutlet></div>
+    <div #mfeOutlet nestedMfesMfeOutlet></div>
 
     <form class="login-form" (ngSubmit)="login()">
       <label>

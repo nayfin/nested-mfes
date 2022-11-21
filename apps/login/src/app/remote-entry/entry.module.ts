@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { RemoteEntryComponent } from './entry.component';
 import { remoteRoutes } from './entry.routes';
 import { setRemoteDefinitions } from '@nrwl/angular/mf';
+import { MfeOutletDirective } from '@nested-mfes/shared/mfe-utils';
 // import { setRemoteDefinitions } from '@nrwl/angular/mf';
 
 console.log('Entry Module')
@@ -14,6 +15,7 @@ console.log('Entry Module')
   imports: [
     CommonModule,
     FormsModule,
+    MfeOutletDirective,
     RouterModule.forChild(remoteRoutes),
   ],
   providers: [
