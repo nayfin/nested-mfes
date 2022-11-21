@@ -1,14 +1,20 @@
-import { AfterViewInit, Component, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentRef, OnInit } from '@angular/core';
 import { UserService } from '@nested-mfes/shared/data-access-user';
-import { loadRemoteModule } from '@nrwl/angular/mf';
-import { setRemoteDefinitions } from '@nrwl/angular/mf';
 
 @Component({
   selector: 'nested-mfes-login-entry',
   template: `  
   LOGIN REMOTE
   <div class="login-app">
-    <div #mfeOutlet nestedMfesMfeOutlet></div>
+    
+    <ng-container 
+      *ngIf="remoteDefinitions"
+      nestedMfesMfeOutlet 
+      [remoteDefinitions]="remoteDefinitions"
+      remoteModule="./Component"
+      remoteName="message"
+      [initializationCallback]="initializeMfe"
+    ></ng-container>
 
     <form class="login-form" (ngSubmit)="login()">
       <label>
@@ -25,10 +31,9 @@ import { setRemoteDefinitions } from '@nrwl/angular/mf';
   </div>
   `,
 })
-export class RemoteEntryComponent implements AfterViewInit{
+export class RemoteEntryComponent implements OnInit {
 
-  @ViewChild('mfeOutlet', { read: ViewContainerRef })
-  viewContainer!: ViewContainerRef;
+  remoteDefinitions: undefined | Record<string, string>;
 
   username = '';
   password = '';
@@ -38,16 +43,16 @@ export class RemoteEntryComponent implements AfterViewInit{
     this.userService.checkCredentials(this.username, this.password);
   }
 
-  async ngAfterViewInit() {
+  initializeMfe(ref: ComponentRef<unknown>) {
+    ref.setInput('message', 'Howdy');
+  }
+
+  async ngOnInit () {
     // TODO: this shouldn't be needed here and could potentially overwrite existing remote definitions 
     await fetch('/assets/module-federation.manifest.json')
       .then((res) => res.json())
       .then((definitions) => {
-        return setRemoteDefinitions(definitions)
+        this.remoteDefinitions = definitions
     })
-    const m = await loadRemoteModule('message', './Component');
-    const ref = this.viewContainer.createComponent(m.RemoteEntryComponent);
-    // Set's input value on component
-    ref.setInput('message', 'Howdy');
   }
 }
