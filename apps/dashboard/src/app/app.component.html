@@ -1,8 +1,8 @@
-<div class="dashboard-nav">Admin Dashboard</div>
-<button routerLink="../">Back</button>
+<h1 class="dashboard-nav">Admin Dashboard (Host MFE)</h1>
+<!-- <button routerLink="../">Back</button> -->
 
-<div *ngIf="isLoggedIn$ | async; else signIn">
+<!-- <div *ngIf="isLoggedIn$ | async; else signIn">
   You are authenticated so you can see this content.
-</div>
+</div> -->
 <router-outlet></router-outlet>
-<ng-template #signIn>NOT SIGNED IN</ng-template>
+<!-- <ng-template #signIn>NOT SIGNED IN</ng-template> -->
